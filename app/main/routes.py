@@ -7,7 +7,11 @@ from app.main.forms import CarForm
 
 @main.route('/')
 def index():
-    return render_template('index.html', title='Car Inventory')
+    cars = None
+    if current_user.is_authenticated:
+        cars = current_user.cars
+    return render_template('index.html', title='Car Inventory', cars=cars)
+
 
 
 @main.route('/profile')
