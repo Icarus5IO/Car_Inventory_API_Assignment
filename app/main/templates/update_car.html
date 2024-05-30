@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Edit Car</h2>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            {{ form.make.label }}
+            {{ form.make(class="form-control", value=car.make) }}
+        </div>
+
+        <div class="form-group">
+            {{ form.model.label }}
+            {{ form.model(class="form-control", value=car.model) }}
+        </div>
+
+        <div class="form-group">
+            {{ form.year.label }}
+            {{ form.year(class="form-control", value=car.year) }}
+        </div>
+
+        <div class="form-group">
+            {{ form.color.label }}
+            {{ form.color(class="form-control", value=car.color) }}
+        </div>
+
+        <div class="form-group">
+            {{ form.transmission.label }}
+            {{ form.transmission(class="form-control", value=car.transmission) }}
+        </div>
+
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+{% endblock %}
