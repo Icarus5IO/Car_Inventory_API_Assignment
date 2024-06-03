@@ -36,15 +36,8 @@ def create_car():
         db.session.add(car)
         db.session.commit()
         flash('Car added to inventory!', 'success')
-        return redirect(url_for('main.cars'))
+        return redirect(url_for('main.index'))
     return render_template('create_car.html', title='Add New Car', form=form)
-
-
-@main.route('/cars')
-@login_required
-def cars():
-    cars = Car.query.filter_by(user_id=current_user.id).all()
-    return render_template('cars.html', title='My Cars', cars=cars)
 
 
 @main.route('/update_car/<int:car_id>', methods=['GET', 'POST'])
@@ -63,7 +56,7 @@ def update_car(car_id):
         car.transmission = form.transmission.data
         db.session.commit()
         flash('Your changes have been saved.', 'success')
-        return redirect(url_for('main.cars'))
+        return redirect(url_for('main.index'))
     elif request.method == 'GET':
         # Populate the form with existing car data
         form.make.data = car.make
@@ -83,7 +76,7 @@ def delete_car(car_id):
     db.session.delete(car)
     db.session.commit()
     flash('Car has been deleted.', 'success')
-    return redirect(url_for('main.cars'))
+    return redirect(url_for('main.index'))
 
 
 @main.app_errorhandler(404)

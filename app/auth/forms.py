@@ -1,4 +1,3 @@
-# app/auth/forms.py (corrected)
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
@@ -15,7 +14,9 @@ class LoginForm(FlaskForm):
 class RegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])  # Fixed typo
+    password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
+    first_name = StringField('First Name', validators=[DataRequired()])
+    last_name = StringField('Last Name', validators=[DataRequired()])
     submit = SubmitField('Register')
 
     # Custom validator to check if the email is already in use

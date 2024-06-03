@@ -1,9 +1,11 @@
 from flask import render_template, redirect, url_for, flash, request
+from werkzeug.security import generate_password_hash, check_password_hash
 from . import auth
 from app import db
 from app.auth.forms import LoginForm, RegistrationForm
 from app.models import User
 from flask_login import login_user, logout_user, current_user
+import secrets
 
 
 # Registration Route
@@ -14,7 +16,10 @@ def signup():
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(
-            email=form.email.data
+            first_name=form.first_name.data,
+            last_name=form.last_name.data,
+            email=form.email.data,
+            token=secrets.token_hex(16)
         )
         user.set_password(form.password.data)
         db.session.add(user)

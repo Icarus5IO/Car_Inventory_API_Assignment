@@ -2,7 +2,7 @@
 
 {% block content %}
     <h2>Edit Car</h2>
-    <form method="POST" action="">
+    <form method="POST" action="{{ url_for('main.update_car', car_id=car.id) }}"> 
         {{ form.hidden_tag() }}
 
         <div class="form-group">
