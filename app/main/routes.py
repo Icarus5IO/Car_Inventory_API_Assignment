@@ -8,9 +8,12 @@ from app.main.forms import CarForm
 @main.route('/')
 def index():
     cars = None
+    forms = {}  # Dictionary to store forms for each car
     if current_user.is_authenticated:
         cars = current_user.cars
-    return render_template('index.html', title='Car Inventory', cars=cars)
+        for car in cars:
+            forms[car.id] = CarForm()  # Create a form for each car
+    return render_template('index.html', title='Car Inventory', cars=cars, forms=forms)
 
 
 
